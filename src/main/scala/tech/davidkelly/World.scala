@@ -1,30 +1,23 @@
 package tech.davidkelly
 
-import tech.davidkelly.World.AliveCell
-
 import scala.collection.immutable.HashSet
 
-object World {
+trait World {
+  val generationIteration: Int
 
-  trait Cell {
-    val position: Position
-  }
+  def nextGeneration: World
 
-  case class AliveCell(position: Position) extends Cell
-
-  case class DeadCell(position: Position) extends Cell
-
-
-
+  def isEmpty: Boolean
 }
 
-case class World(
-                  environment: HashSet[AliveCell]
-                )
-{
-  def nextGeneration: World = {
-    ???
-  }
+case class FiniteWorld(
+                        generationIteration: Int,
+                        size: Int,
+                        environment: HashSet[AliveCell]
+                      ) extends World {
+
 
   def isEmpty: Boolean = environment.isEmpty
+
+  override def nextGeneration: World = ???
 }
