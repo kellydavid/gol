@@ -6,27 +6,9 @@ trait Grid {
 
   def toString(markers: Set[Position]): String
 
-  object Offsets {
-    val TOP_LEFT = Position(-1, -1)
-    val TOP = Position(0, -1)
-    val TOP_RIGHT = Position(1, -1)
-    val LEFT = Position(-1, 0)
-    val RIGHT = Position(1, 0)
-    val BOTTOM_LEFT = Position(-1, 1)
-    val BOTTOM = Position(0, 1)
-    val BOTTOM_RIGHT = Position(1, 1)
-  }
-
-  val offsets: Set[Position] = Set(
-    Offsets.TOP_LEFT,
-    Offsets.TOP,
-    Offsets.TOP_RIGHT,
-    Offsets.LEFT,
-    Offsets.RIGHT,
-    Offsets.BOTTOM_LEFT,
-    Offsets.BOTTOM,
-    Offsets.BOTTOM_RIGHT
-  )
+  val offsets: Set[Position] =
+    (-1 to 1).flatMap(x => (-1 to 1).map(y => Position(x, y)))
+    .toSet.filter(pos => pos.x != 0 || pos.y != 0)
 }
 
 case class InfiniteGrid() extends Grid {
