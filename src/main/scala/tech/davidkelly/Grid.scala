@@ -43,17 +43,16 @@ case class FiniteGrid(
   def adjacentPositions(position: Position): Set[Position] =
     offsets.map(offset => Position.add(offset, position)).filter(containsPosition)
 
-  def containsPosition(position: Position): Boolean = {
+  def containsPosition(position: Position): Boolean =
     (position.x, position.y) match {
       case (x, _) if x < 0 || x >= size => false
       case (_, y) if y < 0 || y >= size => false
       case (_, _) => true
     }
-  }
 
-  def toString(markers: Set[Position]): String = {
+  def toString(markers: Set[Position]): String =
     (0 until size).map(y => (0 until size).map(x => {
       if(markers.contains(Position(x, y))) "X" else "-"
     }).mkString).mkString("\n")
-  }
+
 }

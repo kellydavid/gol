@@ -45,19 +45,16 @@ case class FiniteWorld(
     )
   }
 
-  def findAliveNeighbours(cell: Cell): Set[AliveCell] = {
+  def findAliveNeighbours(cell: Cell): Set[AliveCell] =
     environment
       .filter(aliveCell => grid.adjacentPositions(cell.position)
         .contains(aliveCell.position))
-  }
 
-  def findDeadNeighbours(cell: Cell): Set[DeadCell] = {
+  def findDeadNeighbours(cell: Cell): Set[DeadCell] =
     grid.adjacentPositions(cell.position)
-      .filter(deadCellPosition => !findAliveNeighbours(cell).contains(AliveCell(deadCellPosition)))
+      .filter(deadCellPosition => !findAliveNeighbours(cell)
+        .contains(AliveCell(deadCellPosition)))
       .map(DeadCell)
-  }
 
-  override def printWorld(): Unit = {
-    println(grid.toString(environment.map(_.position)))
-  }
+  override def printWorld(): Unit = println(grid.toString(environment.map(_.position)))
 }

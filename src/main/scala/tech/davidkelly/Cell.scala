@@ -13,13 +13,11 @@ case class AliveCell(position: Position) extends Cell {
   def checkSurvival(numberNeighBours: Int): Boolean =
     numberNeighBours >= MINIMUM_NEIGHBOURS_SURVIVAL && numberNeighBours <= MAXIMUM_NEIGHBOURS_SURVIVAL
 
-  override def nextGeneration(neighbours: Set[AliveCell]): Cell = {
+  override def nextGeneration(neighbours: Set[AliveCell]): Cell =
     neighbours.size match {
       case survivalNumber if checkSurvival(survivalNumber) => AliveCell(position)
       case _ => DeadCell(position)
     }
-  }
-
 }
 
 case class DeadCell(position: Position) extends Cell {
@@ -29,10 +27,9 @@ case class DeadCell(position: Position) extends Cell {
   def checkReproduction(numberNeighbours: Int): Boolean =
     numberNeighbours == NUMBER_NEIGHBOURS_REPRODUCTION
 
-  override def nextGeneration(neighbours: Set[AliveCell]): Cell = {
+  override def nextGeneration(neighbours: Set[AliveCell]): Cell =
     neighbours.size match {
       case reproductionNumber if checkReproduction(reproductionNumber) => AliveCell(position)
       case _ => DeadCell(position)
     }
-  }
 }
