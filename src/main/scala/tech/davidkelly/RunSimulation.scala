@@ -39,6 +39,32 @@ object RunSimulation extends App {
     )
   )
 
+  val startingWorld4 = FiniteWorld(
+    generationIteration = 0,
+    grid = FiniteGrid(20),
+    environment = HashSet(
+      AliveCell(position = Position(4, 3)),
+      AliveCell(position = Position(3, 4)),
+      AliveCell(position = Position(5, 4)),
+      AliveCell(position = Position(4, 5)),
+      AliveCell(position = Position(4, 4)),
+      AliveCell(position = Position(6, 4)),
+      AliveCell(position = Position(7, 4))
+    )
+  )
+
+  val glider = FiniteWorld(
+    generationIteration = 0,
+    grid = FiniteGrid(30),
+    environment = HashSet(
+      AliveCell(position = Position(5, 5)),
+      AliveCell(position = Position(6, 5)),
+      AliveCell(position = Position(7, 5)),
+      AliveCell(position = Position(7, 4)),
+      AliveCell(position = Position(6, 3))
+    )
+  )
+
   def run(startingWorld: World, iterations: Int): Unit = {
 
     @tailrec
@@ -49,11 +75,12 @@ object RunSimulation extends App {
       }
     }
 
-    simulate(startingWorld, 50, List.empty).map(world => {
+    simulate(startingWorld, iterations, List.empty).map(world => {
       println("\n\n")
       world.printWorld
+      Thread.sleep(500)
     })
   }
 
-  run(startingWorld3, 10)
+  run(glider, 20)
 }

@@ -1,7 +1,10 @@
 package tech.davidkelly
 
 trait Grid {
+
   def adjacentPositions(position: Position): Set[Position]
+
+  def toString(markers: Set[Position]): String
 
   object Offsets {
     val TOP_LEFT = Position(-1, -1)
@@ -29,6 +32,8 @@ trait Grid {
 case class InfiniteGrid() extends Grid {
   def adjacentPositions(position: Position): Set[Position] =
     offsets.map(offset => Position.add(offset, position))
+
+  def toString(markers: Set[Position]): String = ???
 }
 
 case class FiniteGrid(
@@ -48,7 +53,7 @@ case class FiniteGrid(
 
   def toString(markers: Set[Position]): String = {
     (0 until size).map(y => (0 until size).map(x => {
-      if(markers.contains(Position(x, y))) "X" else "O"
+      if(markers.contains(Position(x, y))) "X" else "-"
     }).mkString).mkString("\n")
   }
 }
