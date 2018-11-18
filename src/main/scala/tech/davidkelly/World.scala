@@ -6,17 +6,19 @@ trait World {
 
   val generationIteration: Int
 
+  val grid: Grid
+
   val environment: HashSet[AliveCell]
 
-  def nextGeneration: World
-
   def isEmpty: Boolean
+
+  def nextGeneration: World
 
 }
 
 case class FiniteWorld(
                         generationIteration: Int,
-                        size: Int,
+                        grid: FiniteGrid,
                         environment: HashSet[AliveCell]
                       ) extends World {
 
@@ -36,21 +38,20 @@ case class FiniteWorld(
           .map(deadCell => deadCell.nextGeneration(findAliveNeighbours(deadCell))))
         .collect({ case cell: AliveCell => cell })
 
-    FiniteWorld(
+    copy(
       generationIteration = generationIteration + 1,
-      size = size,
       environment = aliveCellsNextGeneration ++ deadCellsNextGeneration
     )
   }
 
   def findAliveNeighbours(cell: Cell): Set[AliveCell] = {
     environment
-      .filter(aliveCell => FiniteGrid(size).adjacentPositions(cell.position)
+      .filter(aliveCell => grid.adjacentPositions(cell.position)
         .contains(aliveCell.position))
   }
 
   def findDeadNeighbours(cell: Cell): Set[DeadCell] = {
-    FiniteGrid(size).adjacentPositions(cell.position)
+    grid.adjacentPositions(cell.position)
       .filter(deadCellPosition => !findAliveNeighbours(cell).contains(AliveCell(deadCellPosition)))
       .map(DeadCell)
   }
