@@ -4,8 +4,6 @@ import scala.collection.immutable.HashSet
 
 trait World {
 
-  val generationIteration: Int
-
   val grid: Grid
 
   val environment: HashSet[AliveCell]
@@ -18,7 +16,6 @@ trait World {
 }
 
 case class FiniteWorld(
-                        generationIteration: Int,
                         grid: FiniteGrid,
                         environment: HashSet[AliveCell]
                       ) extends World {
@@ -40,7 +37,6 @@ case class FiniteWorld(
         .collect({ case cell: AliveCell => cell })
 
     copy(
-      generationIteration = generationIteration + 1,
       environment = aliveCellsNextGeneration ++ deadCellsNextGeneration
     )
   }

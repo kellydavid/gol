@@ -6,7 +6,6 @@ import scala.collection.immutable.HashSet
 object RunSimulation extends App {
 
   val startingWorld = FiniteWorld(
-    generationIteration = 0,
     grid = FiniteGrid(5),
     environment = HashSet(
       AliveCell(position = Position(1, 0)),
@@ -18,7 +17,6 @@ object RunSimulation extends App {
   )
 
   val startingWorld2 = FiniteWorld(
-    generationIteration = 0,
     grid = FiniteGrid(10),
     environment = HashSet(
       AliveCell(position = Position(0, 0)),
@@ -28,7 +26,6 @@ object RunSimulation extends App {
   )
 
   val startingWorld3 = FiniteWorld(
-    generationIteration = 0,
     grid = FiniteGrid(20),
     environment = HashSet(
       AliveCell(position = Position(4, 3)),
@@ -40,7 +37,6 @@ object RunSimulation extends App {
   )
 
   val startingWorld4 = FiniteWorld(
-    generationIteration = 0,
     grid = FiniteGrid(20),
     environment = HashSet(
       AliveCell(position = Position(4, 3)),
@@ -54,7 +50,6 @@ object RunSimulation extends App {
   )
 
   val glider = FiniteWorld(
-    generationIteration = 0,
     grid = FiniteGrid(30),
     environment = HashSet(
       AliveCell(position = Position(5, 5)),

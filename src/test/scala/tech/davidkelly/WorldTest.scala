@@ -8,7 +8,6 @@ class WorldTest extends FunSuite {
   test("A world with no alive cells in its environment is empty.") {
     assert(
       FiniteWorld(
-        generationIteration = 0,
         grid = FiniteGrid(5),
         environment = HashSet.empty
       ).isEmpty)
@@ -17,7 +16,6 @@ class WorldTest extends FunSuite {
   test("A world with one alive cell in its environment is not empty.") {
     assert(!
       FiniteWorld(
-        generationIteration = 0,
         grid = FiniteGrid(5),
         environment = HashSet(AliveCell(Position(1, 1)))
       ).isEmpty)
@@ -25,13 +23,11 @@ class WorldTest extends FunSuite {
 
   test("A finite world which is empty will produce an empty world in the next generation.") {
     val testWorld = FiniteWorld(
-      generationIteration = 0,
       grid = FiniteGrid(5),
       environment = HashSet.empty
     )
     val result = testWorld.nextGeneration
     assert(result === FiniteWorld(
-      generationIteration = 1,
       grid = FiniteGrid(5),
       environment = HashSet.empty
     ))
@@ -39,7 +35,6 @@ class WorldTest extends FunSuite {
 
   test("A finite world will transition to the next generation with underpopulation.") {
     val testWorld = FiniteWorld(
-      generationIteration = 0,
       grid = FiniteGrid(5),
       environment = HashSet(
         AliveCell(Position(0, 0)),
@@ -49,7 +44,6 @@ class WorldTest extends FunSuite {
     )
     val result = testWorld.nextGeneration
     assert(result === FiniteWorld(
-      generationIteration = 1,
       grid = FiniteGrid(5),
       environment = HashSet.empty
     ))
@@ -57,7 +51,6 @@ class WorldTest extends FunSuite {
 
   test("A finite world will transition to the next generation with survival.") {
     val testWorld = FiniteWorld(
-      generationIteration = 0,
       grid = FiniteGrid(5),
       environment = HashSet(
         AliveCell(Position(1, 0)),
@@ -68,7 +61,6 @@ class WorldTest extends FunSuite {
     )
     val result = testWorld.nextGeneration
     assert(result === FiniteWorld(
-      generationIteration = 1,
       grid = FiniteGrid(5),
       environment = HashSet(
         AliveCell(Position(1, 0)),
@@ -81,7 +73,6 @@ class WorldTest extends FunSuite {
 
   test("A finite world will transition to the next generation with underpopulation and reproduction.") {
     val testWorld = FiniteWorld(
-        generationIteration = 0,
       grid = FiniteGrid(5),
         environment = HashSet(
           AliveCell(Position(0, 0)),
@@ -91,7 +82,6 @@ class WorldTest extends FunSuite {
     )
     val result = testWorld.nextGeneration
     assert(result === FiniteWorld(
-        generationIteration = 1,
         grid = FiniteGrid(5),
         environment = HashSet(
           AliveCell(Position(1, 1))
@@ -101,7 +91,6 @@ class WorldTest extends FunSuite {
 
   test("A finite world will transition to the next generation with overpopulation and reproduction.") {
     val testWorld = FiniteWorld(
-      generationIteration = 0,
       grid = FiniteGrid(5),
       environment = HashSet(
         AliveCell(Position(1, 0)),
@@ -113,7 +102,6 @@ class WorldTest extends FunSuite {
     )
     val result = testWorld.nextGeneration
     assert(result === FiniteWorld(
-      generationIteration = 1,
       grid = FiniteGrid(5),
       environment = HashSet(
         AliveCell(Position(0, 0)),
