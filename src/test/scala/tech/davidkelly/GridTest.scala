@@ -89,10 +89,10 @@ class GridTest extends FunSuite {
       Position(0, 0)
     ))
     assert(result ===
-      """XOOOO
-        |OOOOO
-        |OXOOO
-        |OOOOO
-        |OOOOO""".stripMargin)
+      """X----
+        |-----
+        |-X---
+        |-----
+        |-----""".stripMargin)
   }
 }
