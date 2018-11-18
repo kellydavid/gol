@@ -1,7 +1,7 @@
 package tech.davidkelly
 
 import org.scalatest.FunSuite
-import tech.davidkelly.World.{AliveCell, Position}
+import tech.davidkelly.World.AliveCell
 
 import scala.collection.immutable.HashSet
 

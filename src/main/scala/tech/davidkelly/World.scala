@@ -6,8 +6,6 @@ import scala.collection.immutable.HashSet
 
 object World {
 
-  case class Position(x: Int, y: Int)
-
   trait Cell {
     val position: Position
   }
