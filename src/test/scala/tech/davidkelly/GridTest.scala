@@ -83,4 +83,16 @@ class GridTest extends FunSuite {
     assert(result === Set.empty)
   }
 
+  test("FiniteGrid(5) toString"){
+    val result = FiniteGrid(5).toString(Set(
+      Position(1, 2),
+      Position(0, 0)
+    ))
+    assert(result ===
+      """XOOOO
+        |OOOOO
+        |OXOOO
+        |OOOOO
+        |OOOOO""".stripMargin)
+  }
 }

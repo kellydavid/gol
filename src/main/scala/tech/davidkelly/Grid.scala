@@ -45,4 +45,10 @@ case class FiniteGrid(
       case (_, _) => true
     }
   }
+
+  def toString(markers: Set[Position]): String = {
+    (0 until size).map(y => (0 until size).map(x => {
+      if(markers.contains(Position(x, y))) "X" else "O"
+    }).mkString).mkString("\n")
+  }
 }

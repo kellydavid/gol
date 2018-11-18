@@ -14,6 +14,7 @@ trait World {
 
   def nextGeneration: World
 
+  def printWorld(): Unit
 }
 
 case class FiniteWorld(
@@ -25,7 +26,7 @@ case class FiniteWorld(
 
   def isEmpty: Boolean = environment.isEmpty
 
-  override def nextGeneration: World = {
+  override def nextGeneration: FiniteWorld = {
 
     def aliveCellsNextGeneration: HashSet[AliveCell] =
       environment
@@ -54,5 +55,9 @@ case class FiniteWorld(
     grid.adjacentPositions(cell.position)
       .filter(deadCellPosition => !findAliveNeighbours(cell).contains(AliveCell(deadCellPosition)))
       .map(DeadCell)
+  }
+
+  override def printWorld(): Unit = {
+    println(grid.toString(environment.map(_.position)))
   }
 }
